@@ -30,7 +30,7 @@ public class SiGMALDevKit{
         frame.setJMenuBar(menu);
         
         //Adding components
-        SiGMALCodeArea code = new SiGMALCodeArea(SiGMALCodeArea.defaultCodeTree());
+        SiGMALCodeArea code = new SiGMALCodeArea();
         frame.add(code);
         
         //Layout setup
