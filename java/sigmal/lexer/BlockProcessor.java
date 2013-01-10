@@ -4,51 +4,39 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.ArrayList;
+//import java.util.ArrayList;
+import java.util.Stack;
 
 public class BlockProcessor{
     public static void readFile(File f) throws IOException{
         FileReader fr = new FileReader(f);
         BufferedReader br = new BufferedReader(fr);
-        ArrayList<String> lines = new ArrayList();
-        ArrayList<Integer> blocks = new ArrayList();
+        Stack<String> lines = new Stack();
+        //ArrayList<Integer> blocks = new ArrayList();
         String line;
         // Read the file and turn it into am ArrayList of Strings with the comment lines removed.
         while((line = br.readLine())!=null){
             if(!line.startsWith("#")){
-                lines.add(line.trim());
+                lines.push(line.trim());
             }
         }
         
-        // Make a list of the lines that start each block
-        for(int i=0; i<lines.size(); i++){
-            line = lines.get(i).trim();
-            if(line.startsWith("object") || line.startsWith("envir") || line.startsWith("action") || line.startsWith("when"))
-                blocks.add(i);
-        }
-        lines.trimToSize();
-        
-        // Split the program lines into blocks and process them.
-        ArrayList<String> block;
-        for(int i=0; i<blocks.size()-1; i++){
-            block = new ArrayList();
-            for(int j=blocks.get(i); j<blocks.get(i+1); j++){
-                if(!lines.get(j).trim().equals(""))
-                    block.add(lines.get(j));
-            }
-            block.trimToSize();
-            processBlock(block);
-        }
-        block = new ArrayList();
-        for(int j=blocks.get(blocks.size()-1); j<lines.size(); j++){
-                if(!lines.get(j).trim().equals(""))
-                    block.add(lines.get(j));
-        }
-        block.trimToSize();
-        processBlock(block);
+        Stack<String> block = new Stack();
+        do{
+            line = lines.pop();
+            if(line==null){
+                break;
+            }else if (KeywordDetector.isBlockStartKeyword(line.split(" ")[0])){
+                block.push(line);
+                BlockProcessor.processBlock(block);
+                block = new Stack();
+            }else{
+                block.push(line);
+            }            
+        }while(true);
     }
         
-    private static void processBlock(ArrayList<String> block){
+    private static void processBlock(Stack<String> block){
         if(block.get(0).startsWith("object")){
             //The type name is the second word of whats before the brackets
             String type = block.get(0).substring(0, block.get(0).indexOf("[")).split(" ")[1];
