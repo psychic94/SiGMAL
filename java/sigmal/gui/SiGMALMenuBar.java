@@ -3,8 +3,14 @@ package sigmal.gui;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JFileChooser;
 import java.awt.MenuShortcut;
 import java.awt.event.KeyEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.io.File;
+
+import sigmal.lexer.BlockProcessor;
 
 public class SiGMALMenuBar extends JMenuBar{
     JMenu file;
@@ -17,7 +23,9 @@ public class SiGMALMenuBar extends JMenuBar{
         edit = new JMenu("Edit");
         tools = new JMenu("Tools");
         file.add(new JMenuItem("New", KeyEvent.VK_N));
-        file.add(new JMenuItem("Open", KeyEvent.VK_O));
+        JMenuItem fileopen = new JMenuItem("Open", KeyEvent.VK_O);
+        fileopen.addActionListener(new FileOpener());
+        file.add(fileopen);
         file.add(new JMenuItem("Save", KeyEvent.VK_S));
         export = createExportTree();
         file.add(export);
@@ -49,5 +57,21 @@ public class SiGMALMenuBar extends JMenuBar{
         //menu.add(expmodel);
         
         return menu;
+    }
+    
+    private class FileOpener implements ActionListener{
+        public void actionPerformed(ActionEvent event){
+            JFileChooser fc = new JFileChooser();
+            fc.setMultiSelectionEnabled(true);
+            int returnVal = fc.showOpenDialog(null);
+            if (returnVal != JFileChooser.APPROVE_OPTION) return;
+            File[] fileList = fc.getSelectedFiles();
+            for(File file : fileList){
+                try{
+                    BlockProcessor.readFile(file);
+                }catch(Exception exception){
+                }
+            }
+        }
     }
 }
