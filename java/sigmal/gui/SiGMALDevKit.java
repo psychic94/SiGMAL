@@ -3,10 +3,12 @@ package sigmal.gui;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.event.*;
+import java.util.ArrayList;
 
 public class SiGMALDevKit{
     static SiGMALMenuBar menu;
     static JFrame frame;
+    //static ArrayList<CollapsibleCodeArea> codeAreas;
     public static void main(String [] args){
         try {
             SwingUtilities.invokeAndWait(new Runnable() {
@@ -30,7 +32,8 @@ public class SiGMALDevKit{
         frame.setJMenuBar(menu);
         
         //Adding components
-        SiGMALCodeArea code = new SiGMALCodeArea();
+        CollapsibleCodeArea code = new CollapsibleCodeArea("Unsaved Code", new SiGMALCodeArea());
+        
         frame.add(code);
         
         //Layout setup
@@ -49,6 +52,7 @@ public class SiGMALDevKit{
         
         //Show window
         //frame.setContentPane(frame);
+        frame.setPreferredSize(new Dimension(500, 250));
         frame.pack();
         frame.setVisible(true);
     }
