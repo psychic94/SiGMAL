@@ -38,10 +38,20 @@ public class BlockProcessor{
         
     private static void processBlock(Stack<String> block){
         if(block.get(0).startsWith("object")){
-            //The type name is the second word of whats before the brackets
-            String type = block.get(0).substring(0, block.get(0).indexOf("[")).split(" ")[1];
-            //Set the first line to whats in the brackets
-            block.set(0, block.get(0).substring(block.get(0).indexOf("[")+1, block.get(0).indexOf("]")));
+            String type;
+            //If the block has a parameter list
+            if(block.get(0).contains("[")){
+                //The type name is the second word of whats before the brackets
+                //Done this way to enable programmer to not put a space before the brackets
+                type = block.get(0).substring(0, block.get(0).indexOf("[")).split(" ")[1];
+                //Set the first line to whats in the brackets
+                block.set(0, block.get(0).substring(block.get(0).indexOf("[")+1, block.get(0).indexOf("]")));
+            }else{
+                //The type name is the second word
+                type = block.get(0).split(" ")[1];
+                //Set the first line to "withoutParams"
+                block.set(0, "withoutParams");
+            }
             //Register the object type
             SiGMALObjectFactory.types.put(type, block);
         }
