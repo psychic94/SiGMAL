@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class BlockProcessor{
-    public void readFile(File f) throws IOException{
+    public static void readFile(File f) throws IOException{
         FileReader fr = new FileReader(f);
         BufferedReader br = new BufferedReader(fr);
         ArrayList<String> lines = new ArrayList();
@@ -48,7 +48,7 @@ public class BlockProcessor{
         processBlock(block);
     }
         
-    private void processBlock(ArrayList<String> block){
+    private static void processBlock(ArrayList<String> block){
         if(block.get(0).startsWith("object")){
             //The type name is the second word of whats before the brackets
             String type = block.get(0).substring(0, block.get(0).indexOf("[")).split(" ")[1];
