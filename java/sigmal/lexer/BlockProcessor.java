@@ -8,20 +8,24 @@ import java.io.IOException;
 import java.util.Stack;
 
 public class BlockProcessor{
-    public static void readFile(File f) throws IOException{
+    public static Stack readFile(File f) throws IOException{
         FileReader fr = new FileReader(f);
         BufferedReader br = new BufferedReader(fr);
         Stack<String> lines = new Stack();
         //ArrayList<Integer> blocks = new ArrayList();
         String line;
-        // Read the file and turn it into am ArrayList of Strings with the comment lines removed.
+        // Read the file and turn it into a Stack of Strings with the comment lines removed.
         while((line = br.readLine())!=null){
             if(!line.startsWith("#")){
                 lines.push(line.trim());
             }
         }
-        
+        return lines;
+    }
+    
+    public void processCode(Stack<String> lines){
         Stack<String> block = new Stack();
+        String line;
         do{
             line = lines.pop();
             if(line==null){
@@ -37,7 +41,7 @@ public class BlockProcessor{
     }
         
     private static void processBlock(Stack<String> block){
-        if(block.get(0).startsWith("object")){
+        if(block.get(0).split(" ")[0].equals("object")){
             String type;
             //If the block has a parameter list
             if(block.get(0).contains("[")){
@@ -54,6 +58,8 @@ public class BlockProcessor{
             }
             //Register the object type
             SiGMALObjectFactory.types.put(type, block);
+        }else if(block.get(0).split(" ")[0].equals("envir")){
+            
         }
     }
 }
