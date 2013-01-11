@@ -62,18 +62,9 @@ public class CollapsibleCodeArea extends JPanel implements ActionListener{
         if(collapsed){
             collapsed = false;
             code.setSize(this.getWidth(), 250);
-//             this.add(code);
-//             code.setVisible(true);
-//             layout.putConstraint(SpringLayout.NORTH, code, 0, SpringLayout.SOUTH, button);
-//             layout.putConstraint(SpringLayout.EAST, code, 0, SpringLayout.EAST, this);
-//             layout.putConstraint(SpringLayout.WEST, code, 0, SpringLayout.WEST, this);
-//             layout.putConstraint(SpringLayout.SOUTH, code, 0, SpringLayout.SOUTH, this);
         }else{
             collapsed = true;
             code.setSize(this.getWidth(), 0);
-//             layout.removeLayoutComponent(code);
-//             this.remove(code);
-//             code.setVisible(false);
         }
         repaint();
     }
