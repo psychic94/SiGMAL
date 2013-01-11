@@ -8,7 +8,8 @@ import java.util.ArrayList;
 public class SiGMALDevKit{
     static SiGMALMenuBar menu;
     static JFrame frame;
-    //static ArrayList<CollapsibleCodeArea> codeAreas;
+    static ArrayList<CollapsibleCodeArea> codeAreas;
+    static SpringLayout layout;
     public static void main(String [] args){
         try {
             SwingUtilities.invokeAndWait(new Runnable() {
@@ -37,7 +38,7 @@ public class SiGMALDevKit{
         frame.add(code);
         
         //Layout setup
-        SpringLayout layout = new SpringLayout();
+        layout = new SpringLayout();
         frame.setLayout(layout);
         //Menu
         layout.putConstraint(SpringLayout.NORTH, menu, 0, SpringLayout.NORTH, pane);
@@ -51,9 +52,22 @@ public class SiGMALDevKit{
         layout.putConstraint(SpringLayout.SOUTH, code, -5, SpringLayout.SOUTH, pane);
         
         //Show window
-        //frame.setContentPane(frame);
         frame.setPreferredSize(new Dimension(500, 250));
         frame.pack();
         frame.setVisible(true);
     }
+    
+    public static void addCodeArea(CollapsibleCodeArea area){
+        codeAreas.trimToSize();
+        //The last area added
+        CollapsibleCodeArea prevArea = codeAreas.get(codeAreas.size()-1);
+        codeAreas.add(area);
+        frame.add(area);
+        
+        Container pane = frame.getContentPane();
+        layout.putConstraint(SpringLayout.NORTH, area, 5, SpringLayout.SOUTH, prevArea);
+        layout.putConstraint(SpringLayout.WEST, area, 5, SpringLayout.WEST, pane);
+        layout.putConstraint(SpringLayout.EAST, area, -5, SpringLayout.EAST, pane);
+        layout.putConstraint(SpringLayout.SOUTH, area, -5, SpringLayout.SOUTH, pane);
+    }                
 }
