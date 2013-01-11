@@ -1,5 +1,7 @@
 package sigmal.gui;
 
+import java.util.ArrayList;
+import java.util.Stack;
 import javax.swing.JEditorPane;
 import java.awt.Dimension;
 import javax.swing.BorderFactory;
@@ -13,6 +15,26 @@ public class SiGMALCodeArea extends JEditorPane implements TextListener{
         setOpaque(true);
         setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
         setMinimumSize(new Dimension(50, 50));
+    }
+    
+    public SiGMALCodeArea(ArrayList<String> lines){
+        this();
+        String code = "";
+        for(String line : lines){
+            code += line + "\n";
+        }
+        setText(code);
+    }
+    
+    public SiGMALCodeArea(Stack<String> lines){
+        this();
+        String code = "";
+        do{
+            String line = lines.pop();
+            if(line==null) break;
+            code += line + "\n";
+        }while(true);
+        setText(code);
     }
     
     //Will be used to highlight keywords
