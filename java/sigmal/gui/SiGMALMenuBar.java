@@ -1,5 +1,6 @@
 package sigmal.gui;
 
+import java.util.Stack;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -67,10 +68,13 @@ public class SiGMALMenuBar extends JMenuBar{
             if (returnVal != JFileChooser.APPROVE_OPTION) return;
             File[] fileList = fc.getSelectedFiles();
             for(File file : fileList){
+                Stack text = new Stack();
                 try{
-                    BlockProcessor.readFile(file);
+                    text = BlockProcessor.readFile(file);
                 }catch(Exception exception){
                 }
+                if(text.size()!=0)
+                    SiGMALDevKit.addCodeArea(new CollapsibleCodeArea("Code from " + file.getName(), new SiGMALCodeArea(text)));
             }
         }
     }
