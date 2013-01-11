@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
-//import java.util.ArrayList;
 import java.util.Stack;
 
 public class BlockProcessor{
@@ -12,15 +11,12 @@ public class BlockProcessor{
         FileReader fr = new FileReader(f);
         BufferedReader br = new BufferedReader(fr);
         Stack<String> lines = new Stack();
-        //ArrayList<Integer> blocks = new ArrayList();
         String line;
-        // Read the file and turn it into a Stack of Strings with the comment lines removed.
+        // Read the file and turn it into a Stack of Strings
         while((line = br.readLine())!=null){
-            if(!line.startsWith("#")){
-                lines.push(line.trim());
-            }
+            lines.push(line.trim());
         }
-        return lines;
+        return flip(lines);
     }
     
     public void processCode(Stack<String> lines){
@@ -32,7 +28,7 @@ public class BlockProcessor{
                 break;
             }else if (KeywordDetector.isBlockStartKeyword(line.split(" ")[0])){
                 block.push(line);
-                BlockProcessor.processBlock(block);
+                processBlock(block);
                 block = new Stack();
             }else{
                 block.push(line);
@@ -61,5 +57,15 @@ public class BlockProcessor{
         }else if(block.get(0).split(" ")[0].equals("envir")){
             
         }
+    }
+    
+    public static Stack<String> flip(Stack<String> in){
+        Stack<String> out = new Stack();
+        do{
+            String line = in.pop();
+            if(line==null)break;
+            out.push(line);
+        }while(true);
+        return out;
     }
 }
