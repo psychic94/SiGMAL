@@ -1,14 +1,18 @@
 package sigmal.gui;
 
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.event.*;
 import java.util.ArrayList;
+import java.awt.Container;
+import java.awt.Component;
+import java.awt.Dimension;
+import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
+import javax.swing.SpringLayout;
+import javax.swing.SwingUtilities;
 
 public class SiGMALDevKit{
     static SiGMALMenuBar menu;
     static JFrame frame;
-    static ArrayList<CollapsibleCodeArea> codeAreas;
+    public static JTabbedPane tabs;
     static SpringLayout layout;
     public static void main(String [] args){
         try {
@@ -32,10 +36,11 @@ public class SiGMALDevKit{
         menu  = new SiGMALMenuBar();
         frame.setJMenuBar(menu);
         
-        //Adding components
-        CollapsibleCodeArea code = new CollapsibleCodeArea("Unsaved Code", new SiGMALCodeArea());
+        //Adding components1
+        tabs = new JTabbedPane();
+        tabs.addTab("Unsaved Code", new SiGMALCodeArea());
         
-        frame.add(code);
+        frame.add(tabs);
         
         //Layout setup
         layout = new SpringLayout();
@@ -46,28 +51,14 @@ public class SiGMALDevKit{
         layout.putConstraint(SpringLayout.EAST, menu, 0, SpringLayout.EAST, pane);
         layout.putConstraint(SpringLayout.SOUTH, menu, 0, SpringLayout.NORTH, menu);
         //Code Area
-        layout.putConstraint(SpringLayout.NORTH, code, 5, SpringLayout.SOUTH, menu);
-        layout.putConstraint(SpringLayout.WEST, code, 5, SpringLayout.WEST, pane);
-        layout.putConstraint(SpringLayout.EAST, code, -5, SpringLayout.EAST, pane);
-        layout.putConstraint(SpringLayout.SOUTH, code, -5, SpringLayout.SOUTH, pane);
+        layout.putConstraint(SpringLayout.NORTH, tabs, 5, SpringLayout.SOUTH, menu);
+        layout.putConstraint(SpringLayout.WEST, tabs, 5, SpringLayout.WEST, pane);
+        layout.putConstraint(SpringLayout.EAST, tabs, -5, SpringLayout.EAST, pane);
+        layout.putConstraint(SpringLayout.SOUTH, tabs, -5, SpringLayout.SOUTH, pane);
         
         //Show window
         frame.setPreferredSize(new Dimension(500, 250));
         frame.pack();
         frame.setVisible(true);
-    }
-    
-    public static void addCodeArea(CollapsibleCodeArea area){
-        codeAreas.trimToSize();
-        //The last area added
-        CollapsibleCodeArea prevArea = codeAreas.get(codeAreas.size()-1);
-        codeAreas.add(area);
-        frame.add(area);
-        
-        Container pane = frame.getContentPane();
-        layout.putConstraint(SpringLayout.NORTH, area, 5, SpringLayout.SOUTH, prevArea);
-        layout.putConstraint(SpringLayout.WEST, area, 5, SpringLayout.WEST, pane);
-        layout.putConstraint(SpringLayout.EAST, area, -5, SpringLayout.EAST, pane);
-        layout.putConstraint(SpringLayout.SOUTH, area, -5, SpringLayout.SOUTH, pane);
-    }                
+    }  
 }
