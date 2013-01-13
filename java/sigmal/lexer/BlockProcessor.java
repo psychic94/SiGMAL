@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Stack;
+import java.util.EmptyStackException;
 
 public class BlockProcessor{
     public static Stack readFile(File f) throws IOException{
@@ -23,10 +24,12 @@ public class BlockProcessor{
         Stack<String> block = new Stack();
         String line;
         do{
-            line = lines.pop();
-            if(line==null){
+            try{
+                line = lines.pop();
+            }catch(EmptyStackException e){
                 break;
-            }else if (KeywordDetector.isBlockStartKeyword(line.split(" ")[0])){
+            }
+            if (KeywordDetector.isBlockStartKeyword(line.split(" ")[0])){
                 block.push(line);
                 processBlock(block);
                 block = new Stack();
@@ -62,8 +65,12 @@ public class BlockProcessor{
     public static Stack<String> flip(Stack<String> in){
         Stack<String> out = new Stack();
         do{
-            String line = in.pop();
-            if(line==null)break;
+            String line;
+            try{
+                line = in.pop();
+            }catch(EmptyStackException e){
+                break;
+            }
             out.push(line);
         }while(true);
         return out;

@@ -2,6 +2,7 @@ package sigmal.gui;
 
 import java.util.ArrayList;
 import java.util.Stack;
+import java.util.EmptyStackException;
 import javax.swing.JEditorPane;
 import java.awt.Dimension;
 import javax.swing.BorderFactory;
@@ -30,8 +31,12 @@ public class SiGMALCodeArea extends JEditorPane implements TextListener{
         this();
         String code = "";
         do{
-            String line = lines.pop();
-            if(line==null) break;
+            String line;
+            try{
+                line = lines.pop();
+            }catch(EmptyStackException e){
+                break;
+            }
             code += line + "\n";
         }while(true);
         setText(code);
