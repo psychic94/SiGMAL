@@ -5,6 +5,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import java.awt.MenuShortcut;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
@@ -72,9 +74,10 @@ public class SiGMALMenuBar extends JMenuBar{
                 try{
                     text = BlockProcessor.readFile(file);
                 }catch(Exception exception){
+                    JOptionPane.showMessageDialog(null,  "An error occured while processing " + file.getName() + ".\n" + exception.getStackTrace(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 if(text.size()!=0)
-                    SiGMALDevKit.addCodeArea(new CollapsibleCodeArea("Code from " + file.getName(), new SiGMALCodeArea(text)));
+                    SiGMALDevKit.tabs.addTab("Code from " + file.getName(), new JScrollPane(new SiGMALCodeArea(text), JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
             }
         }
     }
