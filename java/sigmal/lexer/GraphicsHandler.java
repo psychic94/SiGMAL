@@ -1,14 +1,14 @@
 package sigmal.lexer;
 
 import sigmal.gui.SiGMALEnvirPanel;
-import java.awt.Point;
+import sigmal.utils.Point;
 
 public class GraphicsHandler{
     public static void renderObject(SiGMALObject obj, SiGMALEnvirPanel panel){
     }
     
     public static Point projectTo2D(Point pt, SiGMALCamera cam){
-        pt = toSpereical(pt, cam.getPos);
+        pt = toSpherical(pt, cam.getPos());
         //The line above stored theta as x, phi as y, and r as z
         double theta = pt.getX() - cam.getTheta();
         double phi = pt.getY() - cam.getPhi();
@@ -24,15 +24,15 @@ public class GraphicsHandler{
     
     public static Point toSpherical(double x, double y, double z){
         double r = Math.sqrt(x*x + y*y + z*z);
-        double phi = Math.arctan(y/x);
-        double theta = Math.arccos(z/r);
+        double phi = Math.atan(y/x);
+        double theta = Math.acos(z/r);
         return new Point(theta, phi, r);
     }
     
     public static Point toCartesian(double theta, double phi, double r){
         double x = r * Math.sin(theta) * Math.cos(phi);
         double y = r * Math.sin(theta) * Math.sin(phi);
-        double z = r * Math.cos(theta));
+        double z = r * Math.cos(theta);
         return new Point(x ,y, z);
     }
 }

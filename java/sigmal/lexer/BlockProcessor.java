@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.Stack;
 import java.util.EmptyStackException;
 
+import sigmal.utils.KeywordDetector;
+
 public class BlockProcessor{
     public static Stack readFile(File f) throws IOException{
         FileReader fr = new FileReader(f);

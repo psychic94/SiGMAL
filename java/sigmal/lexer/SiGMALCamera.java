@@ -1,5 +1,7 @@
 package sigmal.lexer;
 
+import sigmal.utils.Point;
+
 public class SiGMALCamera{
     private Point pos;
     private double theta;

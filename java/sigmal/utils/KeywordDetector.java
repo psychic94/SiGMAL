@@ -1,4 +1,4 @@
-package sigmal.lexer;
+package sigmal.utils;
 
 
 public class KeywordDetector{
@@ -24,7 +24,7 @@ public class KeywordDetector{
         word.trim();
         boolean found = false;
         for(String modifier : knownModifiers){
-            if word.equalsIgnoreCase(modifier){
+            if(word.equalsIgnoreCase(modifier)){
                 found = true;
                 break;
             }
@@ -33,16 +33,16 @@ public class KeywordDetector{
     }
     
     public static Type getKeywordType(String word){
-        
+        return Type.blockStart;
     }
     
     public static enum Type{
-        blockStart;
-        logic;
-        value;
-        modifier;
-        object;
-        envir;
-        action;
+        blockStart,
+        logic,
+        value,
+        modifier,
+        object,
+        envir,
+        action,
     }
 }
