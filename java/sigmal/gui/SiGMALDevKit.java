@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.SpringLayout;
 import javax.swing.SwingUtilities;
+import javax.swing.JScrollPane;
 
 public class SiGMALDevKit{
     static SiGMALMenuBar menu;
@@ -38,7 +39,7 @@ public class SiGMALDevKit{
         
         //Adding components1
         tabs = new JTabbedPane();
-        tabs.addTab("Unsaved Code", new SiGMALCodeArea());
+        tabs.addTab("Unsaved Code", new JScrollPane(new SiGMALCodeArea()));
         
         frame.add(tabs);
         

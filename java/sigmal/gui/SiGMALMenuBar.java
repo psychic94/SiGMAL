@@ -74,10 +74,11 @@ public class SiGMALMenuBar extends JMenuBar{
                 try{
                     text = BlockProcessor.readFile(file);
                 }catch(Exception exception){
-                    JOptionPane.showMessageDialog(null,  "An error occured while processing " + file.getName() + ".\n" + exception.getStackTrace(), "Error", JOptionPane.ERROR_MESSAGE);
+                    String message = "An error occured while processing " + file.getName() + ".\n";
+                    JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 if(text.size()!=0)
-                    SiGMALDevKit.tabs.addTab("Code from " + file.getName(), new JScrollPane(new SiGMALCodeArea(text), JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+                    SiGMALDevKit.tabs.addTab("Code from " + file.getName(), new JScrollPane(new SiGMALCodeArea(text)));
             }
         }
     }
