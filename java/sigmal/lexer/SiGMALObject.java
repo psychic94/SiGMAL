@@ -43,4 +43,8 @@ public class SiGMALObject{
     public void addMember(SiGMALObject member){
         members.add(member);
     }
+    
+    private void processCode(Stack definition, ArrayList dimentions){
+    
+    }
 }
