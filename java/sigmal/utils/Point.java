@@ -8,25 +8,37 @@ public class Point{
     //2D 3D or 4D
     private final double dims;
     public Point(double x, double y){
-        this(x, y, 0, 0, 2);
+        this.x = x;
+        this.y = y;
+        this.z = 0;
+        this.w = 0;
         this.r = Math.sqrt(x*x + y*y);
         this.theta = Math.atan2(y, x);
+        this.phi = 0;
+        this.omicron = 0;
+        this.dims = 2;
     }
     public Point(double x, double y, double z){
-        this(x, y, z, 0, 3);
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.w = 0;
         this.r = Math.sqrt(x*x + y*y + z*z);
         this.phi = Math.atan(y/x);
         this.theta = Math.acos(z/r);
+        this.omicron = 0;
+        this.dims = 3;
     }
     public Point(double x, double y, double z, double w){
-        this(x, y, z, w, 4);
-    }
-    public Point(double x, double y, double z, double w, double dims){
         this.x = x;
         this.y = y;
         this.z = z;
         this.w = w;
-        this.dims = dims;
+        this.r = Math.sqrt(x*x + y*y + z*z + w*w);
+        this.theta = 0;
+        this.phi = 0;
+        this.omicron = 0;
+        this.dims = 4;
     }
     
     public double getX(){
