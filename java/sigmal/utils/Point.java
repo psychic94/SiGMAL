@@ -6,7 +6,7 @@ public class Point{
     //Spherical coordinates
     private final double theta, phi, omicron, r;
     //2D 3D or 4D
-    private final double dims;
+    private final int dims;
     public Point(double x, double y){
         this.x = x;
         this.y = y;
@@ -65,7 +65,7 @@ public class Point{
     public double getR(){
         return r;
     }
-    public double getDims(){
+    public int getDims(){
         return dims;
     }
     
