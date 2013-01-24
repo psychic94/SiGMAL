@@ -8,7 +8,7 @@ public class GraphicsHandler{
     }
     
     public static Point projectTo2D(Point pt, SiGMALCamera cam){
-        pt = pt.relativeTo(cam.getPos(), cam.getDir());
-        return new Point(pt.getX() / r, pt.getY() / r);
+        pt = pt.relativeTo(cam.getPos(), cam.getYaw(), cam.getPitch());
+        return new Point(Math.tan(pt.getTheta()), Math.tan(pt.getPhi()));
     }
 }
