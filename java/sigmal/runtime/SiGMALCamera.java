@@ -1,4 +1,4 @@
-package sigmal.lexer;
+package sigmal.runtime;
 
 import sigmal.utils.Point;
 

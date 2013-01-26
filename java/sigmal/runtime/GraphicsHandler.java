@@ -1,4 +1,4 @@
-package sigmal.lexer;
+package sigmal.runtime;
 
 import sigmal.gui.SiGMALEnvirPanel;
 import sigmal.utils.Point;

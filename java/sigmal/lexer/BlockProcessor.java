@@ -10,7 +10,7 @@ import java.util.EmptyStackException;
 import sigmal.utils.KeywordDetector;
 
 public class BlockProcessor{
-    public static Stack readFile(File f) throws IOException{
+    public static void readFile(File f) throws IOException{
         FileReader fr = new FileReader(f);
         BufferedReader br = new BufferedReader(fr);
         Stack<String> lines = new Stack();
@@ -19,12 +19,10 @@ public class BlockProcessor{
         while((line = br.readLine())!=null){
             lines.push(line.trim());
         }
-        return flip(lines);
-    }
-    
-    public void processCode(Stack<String> lines){
+        //File is now upside down
+        
+        //Break file into blocks fromo the bottom up
         Stack<String> block = new Stack();
-        String line;
         do{
             try{
                 line = lines.pop();
@@ -42,24 +40,15 @@ public class BlockProcessor{
     }
         
     private static void processBlock(Stack<String> block){
-        if(block.get(0).split(" ")[0].equals("object")){
+        if(block.peek().split(" ")[0].equals("object")){
             String type;
-            //If the block has a parameter list
-            if(block.get(0).contains("[")){
-                //The type name is the second word of whats before the brackets
-                //Done this way to enable programmer to not put a space before the brackets
-                type = block.get(0).substring(0, block.get(0).indexOf("[")).split(" ")[1];
-                //Set the first line to whats in the brackets
-                block.set(0, block.get(0).substring(block.get(0).indexOf("[")+1, block.get(0).indexOf("]")));
-            }else{
-                //The type name is the second word
-                type = block.get(0).split(" ")[1];
-                //Set the first line to "withoutParams"
-                block.set(0, "withoutParams");
-            }
-            //Register the object type
-            SiGMALObjectFactory.types.put(type, block);
-        }else if(block.get(0).split(" ")[0].equals("envir")){
+            //The type name is the second word of whats before the colon
+            //Done this way to enable programmer to not put a space before the colon
+            String line = block.pop();
+            type = line.substring(0, line.indexOf(":")).split(" ")[1];
+            SiGMALObjectFactory.types.put(type, flip(block));
+            //Block is now upside down
+        }else if(block.peek().split(" ")[0].equals("envir")){
             
         }
     }

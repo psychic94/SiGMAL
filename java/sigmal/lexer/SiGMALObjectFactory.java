@@ -3,6 +3,7 @@ package sigmal.lexer;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Stack;
+import sigmal.runtime.*;
 
 public class SiGMALObjectFactory{
     public static HashMap<String, Stack<String>> types;
