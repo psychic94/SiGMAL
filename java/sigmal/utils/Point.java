@@ -93,4 +93,17 @@ public class Point{
         double z2 = pt.getR(3) * Math.cos(pitch);        
         return new Point(x2, y2, z2);
     }
+    
+    public static Point average(Point[] pts){
+        double x=0, y=0, z=0, w=0;
+        int ptnum=0;
+        for(Point pt : pts){
+            x += pt.getX();
+            y += pt.getY();
+            z += pt.getZ();
+            w += pt.getW();
+            ptnum++;
+        }
+        return new Point(x / ptnum, y / ptnum, z / ptnum, w / ptnum);
+    }
 }
