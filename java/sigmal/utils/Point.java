@@ -1,6 +1,6 @@
 package sigmal.utils;
 
-public class Point{
+public class Point implements Cloneable{
     //Cartesian coordinates
     private final double x, y, z, w;
     //Spherical coordinates; theta is yaw, phi is pitch, omicron is roll(4D)
@@ -76,6 +76,7 @@ public class Point{
     
     //This is for 2D use only
     public Point relativeTo(Point pt, double yaw){
+        pt = pt.clone();
         pt = this.relativeTo(pt);
         yaw = pt.getTheta() - yaw;
         double x2 = pt.getR(2) * Math.cos(yaw);
@@ -85,12 +86,12 @@ public class Point{
     
     //This is for 3D use only
     public Point relativeTo(Point pt, double yaw, double pitch){
+        pt = pt.clone();
         pt = this.relativeTo(pt);
         yaw = pt.getTheta() - yaw;
         pitch = pt.getPhi() - pitch;
-        double x2 = pt.getR(3) * Math.sin(pitch) * Math.cos(yaw);
-        double y2 = pt.getR(3) * Math.sin(pitch) * Math.sin(yaw);
-        double z2 = pt.getR(3) * Math.cos(pitch);        
+        double z2 = pt.getR(3) * Math.sin(pitch);
+        double rad = pt.
         return new Point(x2, y2, z2);
     }
     
