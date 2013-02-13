@@ -19,4 +19,27 @@ public class Direction{
         this.omicron = omicron;
         this.dims = 4;
     }
+    
+    public double getTheta(){
+        return theta;
+    }
+    public double getPhi(){
+        return phi;
+    }
+    public double getOmicron(){
+        return omicron;
+    }
+    public int getDims(){
+        return dims;
+    }
+    
+    public double setTheta(int value){
+        theta = value;
+    }
+    public double setPhi(int value){
+        phi = value;
+    }
+    public double getOmicron(int value){
+        omicron = value;
+    }
 }
