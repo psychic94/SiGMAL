@@ -33,13 +33,13 @@ public class Direction{
         return dims;
     }
     
-    public double setTheta(int value){
+    public void setTheta(int value){
         theta = value;
     }
-    public double setPhi(int value){
+    public void setPhi(int value){
         phi = value;
     }
-    public double getOmicron(int value){
+    public void setOmicron(int value){
         omicron = value;
     }
 }
