@@ -46,7 +46,6 @@ public class BlockProcessor{
             //Done this way to enable programmer to not put a space before the colon
             String line = block.pop();
             type = line.substring(0, line.indexOf(":")).split(" ")[1];
-            SiGMALObjectFactory.types.put(type, flip(block));
             //Block is now upside down
         }else if(block.peek().split(" ")[0].equals("envir")){
             
