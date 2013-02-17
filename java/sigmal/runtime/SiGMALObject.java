@@ -15,12 +15,12 @@ public abstract class SiGMALObject{
     //Notify the environment to draw this instance
     public abstract void render();
     
-    //Associates an object to this objce
+    //Associates an object to this object
     public void addMember(String name, SiGMALObject member){
         members.put(name, member);
     }
     
-    //Removes association to the member object and associates the ex-member with the environment
+    //Removes association to the member object and returns it
     public SiGMALObject removeMember(String name){
         return members.remove(name);
     }
