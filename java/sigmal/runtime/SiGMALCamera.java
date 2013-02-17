@@ -17,6 +17,15 @@ public class SiGMALCamera{
     public Point getPos(){
         return pos;
     }
+    public double getYaw(){
+        return dir.getTheta();
+    }
+    public double getPitch(){
+        return dir.getPhi();
+    }
+    public double getRoll(){
+        return dir.getOmicron();
+    }
     
     public void setActivity(boolean state){
         activity = state;
