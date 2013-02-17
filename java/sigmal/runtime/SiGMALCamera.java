@@ -1,30 +1,27 @@
 package sigmal.runtime;
 
 import sigmal.utils.Point;
+import sigmal.utils.Direction;
 
 public class SiGMALCamera{
     private Point pos;
-    private double yaw;
-    private double pitch;
-    private double roll;
+    private Direction dir;
+    private boolean activity;
 
     public SiGMALCamera(){
-        pos = new Point(0, 0, 0, 0);
-        yaw = 0;
-        pitch = 0;
-        roll = 0;
+        pos = new Point(0, 0, 0);
+        dir = new Direction(0, 0);
+        activity = false;
     }
 
     public Point getPos(){
         return pos;
     }
-    public double getYaw(){
-        return yaw;
+    
+    public void setActivity(boolean state){
+        activity = state;
     }
-    public double getPitch(){
-        return pitch;
-    }
-    public double getRoll(){
-        return roll;
+    public boolean isActive(){
+        return activity;
     }
 }
