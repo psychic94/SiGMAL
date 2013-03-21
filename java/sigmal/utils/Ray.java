@@ -4,26 +4,28 @@ public class Ray{
     private Point point;
     private Direction direction;
     private int dims;
-    public Ray(Point pt, Direction dir){
+    public Ray(Point pt, Direction dir) throws DimMismatchException{
+        if(pt.getDims()!=dir.getDims()) 
+            throw new DimMismatchException("Tried to make ray with point and direction in different dimentions");
         point = pt;
         direction = dir;
         dims = point.getDims();
     }
     
-    public double getX(){
+    public Double getX(){
         return point.getX();
     }
-    public double getY(){
+    public Double getY(){
         return point.getY();
     }
-    public double getZ(){
+    public Double getZ(){
         return point.getZ();
     }
-    public double getW(){
+    public Double getW(){
         return point.getW();
     }
-    public double getR(int dims){
-        return point.getR(dims);
+    public Double getR(){
+        return point.getR();
     }
     public Point getPoint(){
         return point;
