@@ -79,4 +79,16 @@ public class Point3D extends Point{
         }
         return new Point3D(xsum / ptnum, ysum / ptnum, zsum / ptnum);
     }
+
+    public Point2D projectTo2D(){
+        return new Point2D(Math.tan(theta), Math.tan(phi));
+    }
+    
+    public Point3D projectTo3D(){
+        return this;
+    }
+
+    public Point4D projectTo4D(){
+        return new Point4D(x, y, z, 0);
+    }
 }

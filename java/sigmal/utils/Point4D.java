@@ -53,7 +53,7 @@ public class Point4D extends Point{
     }
     public Double getR(){
         return r;
-	}
+    }
 
     public int getDims(){
         return 4;
@@ -85,5 +85,18 @@ public class Point4D extends Point{
             ptnum++;
         }
         return new Point4D(xsum / ptnum, ysum / ptnum, zsum / ptnum, wsum / ptnum);
+    }
+
+    public Point2D projectTo2D(){
+       Point3D pt = this.projectTo3D();
+       return pt.projectTo2D();
+    }
+    
+    public Point3D projectTo3D(){
+        return new Point3D(Math.tan(theta), Math.tan(phi), Math.tan(omicron));
+    }
+
+    public Point4D projectTo4D(){
+        return this;
     }
 }

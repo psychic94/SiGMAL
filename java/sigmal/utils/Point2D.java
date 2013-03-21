@@ -72,4 +72,16 @@ public class Point2D extends Point{
         }
         return new Point2D(xsum / ptnum, ysum / ptnum);
     }
+
+    public Point2D projectTo2D(){
+        return this;
+    }
+    
+    public Point3D projectTo3D(){
+        return new Point3D(x, y, 0);
+    }
+
+    public Point4D projectTo4D(){
+        return new Point4D(x, y, 0, 0);
+    }
 }
