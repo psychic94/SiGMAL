@@ -25,21 +25,9 @@ public class Point2D extends Point{
     public Double getY(){
         return y;
     }
-    public Double getZ(){
-        return null;
-    }
-    public Double getW(){
-        return null;
-    }
-
+    
     public Double getTheta(){
         return theta;
-    }
-    public Double getPhi(){
-        return null;
-    }
-    public Double getOmicron(){
-        return null;
     }
     public Double getR(){
         return r;
